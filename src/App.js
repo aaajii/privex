@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Nav, Button } from "react-bootstrap";
+import axios from "axios";
 
 import CustomModal from "./components/CustomModal";
 import Content from "./components/Content";
 
 import "./App.css";
+import TrancheInfo from "./components/TrancheInfo";
 
 const SAMPLE_DATA = [
   {
@@ -25,17 +27,39 @@ const SAMPLE_DATA = [
   },
 ];
 
+const fetchData = () => {
+  const { data } = axios
+    .get("url")
+    .then((response) => console.log(response))
+    .catch((err) => {
+      console.error(err);
+    });
+
+  return data;
+};
+
 function App() {
-  const [showModal, setShowModal] = useState(false);
+  const [showTabbedModal, setShowModal] = useState(false);
+  const [showFormModal, setShowFormModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
         <p>Privex Homework</p>
         <Button onClick={() => setShowModal(true)}>Homework 1</Button>
+        <Button
+          onClick={() => setShowFormModal(true)}
+          className="mt-2"
+          variant="secondary"
+        >
+          Homework 2
+        </Button>
       </header>
 
-      <CustomModal showModal={showModal} onHide={() => setShowModal(false)}>
+      <CustomModal
+        showModal={showTabbedModal}
+        onHide={() => setShowModal(false)}
+      >
         <div className="w-100 h-100">
           <Nav
             variant="tabs"
@@ -57,6 +81,13 @@ function App() {
           </Nav>
           <Content data={SAMPLE_DATA[selectedIndex]} />
         </div>
+      </CustomModal>
+
+      <CustomModal
+        showModal={showFormModal}
+        onHide={() => setShowFormModal(false)}
+      >
+        <TrancheInfo />
       </CustomModal>
     </div>
   );
