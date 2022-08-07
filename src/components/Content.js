@@ -1,6 +1,7 @@
 import { NegotiationLog } from "./NegotiationLog";
 import { TradeOffer } from "./TradeOffer";
 import accounting from "accounting";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 
 function Content({ data }) {
   const {
@@ -21,7 +22,11 @@ function Content({ data }) {
       value: title,
     },
     {
-      label: "Facility Amount",
+      label: (
+        <>
+          Facility Amount <BsFillInfoCircleFill className="ms-2" />
+        </>
+      ),
       value: accounting.formatMoney(facilityAmount, "USD"),
     },
     {
@@ -52,7 +57,12 @@ function Content({ data }) {
       value: accounting.formatMoney(thereafter, "USD"),
     },
     {
-      label: "Amount to Sell",
+      label: (
+        <>
+          Amount to Sell
+          <BsFillInfoCircleFill className="ms-2" />
+        </>
+      ),
       value: accounting.formatMoney(sellAmount, "USD"),
     },
     {

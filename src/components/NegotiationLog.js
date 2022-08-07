@@ -1,10 +1,12 @@
 import React from "react";
 import { Alert, Table } from "react-bootstrap";
+import { BsFillInfoCircleFill } from "react-icons/bs";
 export function NegotiationLog() {
   return (
     <>
       <h6 className="fw-bolder">NEGOTIATION LOG</h6>
       <Alert variant="primary">
+        <BsFillInfoCircleFill className="me-2" />
         Current negotiations that are still open and require your further review
         and action
       </Alert>

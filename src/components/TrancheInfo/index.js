@@ -1,9 +1,14 @@
 import { Field, Formik } from "formik";
 import { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
+
+import { BsFillInfoCircleFill } from "react-icons/bs";
+
 import Currency from "../Forms/Currency";
 import Decimal from "../Forms/Decimal";
 import Dropdown from "../Forms/Dropdown";
+
+import "./index.css";
 
 function TrancheInfo() {
   const [formNumber, setFormNumber] = useState(1);
@@ -11,6 +16,7 @@ function TrancheInfo() {
     <div>
       <h5 className="fw-bold">TRANCHE INFO</h5>
       <Alert variant="primary">
+        <BsFillInfoCircleFill className="me-2" />
         For each tranche in your facility, please enter details below, then
         press 'Save/Next' button.
       </Alert>
@@ -45,7 +51,7 @@ function TrancheInfo() {
                   </button>
                 </div>
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].name`}>
+                  <Form.Label htmlFor={`input[${i}].name`} className="required">
                     Tranche Name
                   </Form.Label>
                   <Field
@@ -55,8 +61,11 @@ function TrancheInfo() {
                   />
                 </div>
 
-                <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].facilityType`}>
+                <div className="form-group col-sm-4 fw-bold mb-3">
+                  <Form.Label
+                    htmlFor={`input[${i}].facilityType`}
+                    className="required"
+                  >
                     Facility Type
                   </Form.Label>
                   <Field
@@ -73,7 +82,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].trancheAmount`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].trancheAmount`}
+                    className="required"
+                  >
                     Tranche Amount
                   </Form.Label>
                   <Form.Text className="text-muted ms-3 fw-normal">
@@ -88,8 +100,11 @@ function TrancheInfo() {
                   />
                 </div>
 
-                <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].maturityDate`}>
+                <div className="form-group col-sm-3 fw-bold mb-3 pe-5">
+                  <Form.Label
+                    htmlFor={`input[${i}].maturityDate`}
+                    className="required"
+                  >
                     Maturity Date
                   </Form.Label>
                   <Field
@@ -100,7 +115,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].amountDrawn`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].amountDrawn`}
+                    className="required"
+                  >
                     Tranche Amount Drawn
                   </Form.Label>
                   <Field
@@ -113,7 +131,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].avgLife`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].avgLife`}
+                    className="required"
+                  >
                     Indicative Average Life (Years)
                   </Form.Label>
                   <Field
@@ -125,7 +146,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].amountUndrawn`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].amountUndrawn`}
+                    className="required"
+                  >
                     Tranche Amount Undrawn
                   </Form.Label>
                   <Field
@@ -138,7 +162,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].marginType`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].marginType`}
+                    className="required"
+                  >
                     Margin (% p.a.)
                   </Form.Label>
                   <div className="input-group w-75">
@@ -162,7 +189,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].sellAmount`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].sellAmount`}
+                    className="required"
+                  >
                     Tranche Amount to Sell
                   </Form.Label>
                   <Form.Text className="text-muted ms-3 fw-normal">
@@ -178,7 +208,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].commitmentFee`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].commitmentFee`}
+                    className="required"
+                  >
                     Commitment Fee (% p.a.)
                   </Form.Label>
                   <div className="input-group w-25">
@@ -191,7 +224,10 @@ function TrancheInfo() {
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].rolloverDate`}>
+                  <Form.Label
+                    htmlFor={`input[${i}].rolloverDate`}
+                    className="required"
+                  >
                     Interest Rollover Date
                   </Form.Label>
                   <div className="row">
@@ -216,6 +252,7 @@ function TrancheInfo() {
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
                   <Form.Label htmlFor={`input[${i}].interest`}>
                     Accrued Interest
+                    <BsFillInfoCircleFill className="ms-2" />
                   </Form.Label>
                   <Field
                     name={`input[${i}].interest`}
