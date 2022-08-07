@@ -1,6 +1,9 @@
 import { Field, Formik } from "formik";
 import { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
+import Currency from "../Forms/Currency";
+import Decimal from "../Forms/Decimal";
+import Dropdown from "../Forms/Dropdown";
 
 function TrancheInfo() {
   const [formNumber, setFormNumber] = useState(1);
@@ -60,11 +63,13 @@ function TrancheInfo() {
                     name={`input[${i}].facilityType`}
                     className="form-control form-select"
                     as="select"
-                  >
-                    <option value="A">Type A</option>
-                    <option value="B">Type B</option>
-                    <option value="C">Type C</option>
-                  </Field>
+                    options={[
+                      { value: "A", label: "Type A" },
+                      { value: "B", label: "Type B" },
+                      { value: "C", label: "Type C" },
+                    ]}
+                    component={Dropdown}
+                  ></Field>
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
@@ -74,14 +79,13 @@ function TrancheInfo() {
                   <Form.Text className="text-muted ms-3 fw-normal">
                     Please enter full value. Enter 1 Million as 1,000,000
                   </Form.Text>
-                  <div className="input-group">
-                    <span className="input-group-text">USD</span>
-                    <Field
-                      name={`input[${i}].trancheAmount`}
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
+                  <Field
+                    name={`input[${i}].trancheAmount`}
+                    className="form-control"
+                    type="text"
+                    unit="USD"
+                    component={Currency}
+                  />
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
@@ -99,14 +103,13 @@ function TrancheInfo() {
                   <Form.Label htmlFor={`input[${i}].amountDrawn`}>
                     Tranche Amount Drawn
                   </Form.Label>
-                  <div className="input-group">
-                    <span className="input-group-text">USD</span>
-                    <Field
-                      name={`input[${i}].amountDrawn`}
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
+                  <Field
+                    name={`input[${i}].amountDrawn`}
+                    className="form-control"
+                    type="text"
+                    unit="USD"
+                    component={Currency}
+                  />
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
@@ -114,9 +117,10 @@ function TrancheInfo() {
                     Indicative Average Life (Years)
                   </Form.Label>
                   <Field
-                    name={`input[${i}].avgLife`}
-                    className="form-control"
-                    type="text"
+                    name={`input[0].avgLife`}
+                    className=""
+                    type="number"
+                    component={Decimal}
                   />
                 </div>
 
@@ -124,30 +128,36 @@ function TrancheInfo() {
                   <Form.Label htmlFor={`input[${i}].amountUndrawn`}>
                     Tranche Amount Undrawn
                   </Form.Label>
-                  <div className="input-group">
-                    <span className="input-group-text">USD</span>
-                    <Field
-                      name={`input[${i}].amountUndrawn`}
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
+                  <Field
+                    name={`input[${i}].amountUndrawn`}
+                    className="form-control"
+                    type="text"
+                    unit="USD"
+                    component={Currency}
+                  />
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
-                  <Form.Label htmlFor={`input[${i}].amountUndrawn`}>
+                  <Form.Label htmlFor={`input[${i}].marginType`}>
                     Margin (% p.a.)
                   </Form.Label>
-                  <div className="input-group">
+                  <div className="input-group w-75">
                     <Field
-                      name={`input[${i}].amountUndrawn`}
-                      className="form-control form-select"
+                      name={`input[${i}].marginType`}
+                      className="form-control form-select w-50"
                       as="select"
-                    >
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                      <option value="30">30</option>
-                    </Field>
+                      options={[
+                        { value: "jibaro", label: "JIBARO" },
+                        { value: "LLCD", label: "LLCD" },
+                        { value: "QUOPI", label: "QUOPI" },
+                      ]}
+                      component={Dropdown}
+                    ></Field>
+                    <Field
+                      name={`input[${i}].marginPercent`}
+                      className="form-control ms-4 w-25"
+                      type="text"
+                    />
                   </div>
                 </div>
 
@@ -158,21 +168,20 @@ function TrancheInfo() {
                   <Form.Text className="text-muted ms-3 fw-normal">
                     Please enter full value. Enter 1 Million as 1,000,000
                   </Form.Text>
-                  <div className="input-group">
-                    <span className="input-group-text">USD</span>
-                    <Field
-                      name={`input[${i}].sellAmount`}
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
+                  <Field
+                    name={`input[${i}].sellAmount`}
+                    className="form-control"
+                    type="text"
+                    unit="USD"
+                    component={Currency}
+                  />
                 </div>
 
                 <div className="form-group col-sm-6 fw-bold mb-3 pe-5">
                   <Form.Label htmlFor={`input[${i}].commitmentFee`}>
                     Commitment Fee (% p.a.)
                   </Form.Label>
-                  <div className="input-group">
+                  <div className="input-group w-25">
                     <Field
                       name={`input[${i}].commitmentFee`}
                       className="form-control"
@@ -186,14 +195,14 @@ function TrancheInfo() {
                     Interest Rollover Date
                   </Form.Label>
                   <div className="row">
-                    <div className="col-4">
+                    <div className="col-5">
                       <Field
                         name={`input[${i}].rolloverDate`}
                         className="form-control"
                         type="date"
                       />
                     </div>
-                    <div className="col-8">
+                    <div className="col-7">
                       <Form.Check
                         type="checkbox"
                         name={`input[${i}].isConfirmed`}
@@ -208,14 +217,13 @@ function TrancheInfo() {
                   <Form.Label htmlFor={`input[${i}].interest`}>
                     Accrued Interest
                   </Form.Label>
-                  <div className="input-group">
-                    <span className="input-group-text">USD</span>
-                    <Field
-                      name={`input[${i}].interest`}
-                      className="form-control"
-                      type="text"
-                    />
-                  </div>
+                  <Field
+                    name={`input[${i}].interest`}
+                    className="form-control"
+                    type="text"
+                    unit="USD"
+                    component={Currency}
+                  />
                 </div>
                 <hr />
               </Form>

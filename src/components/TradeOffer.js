@@ -1,5 +1,9 @@
 import React from "react";
-import { Button, Card, Form } from "react-bootstrap";
+import { Formik } from "formik";
+import { Button, Card } from "react-bootstrap";
+import Currency from "./Forms/Currency";
+import Dropdown from "./Forms/Dropdown";
+
 export function TradeOffer({ details, numbers }) {
   return (
     <>
@@ -8,12 +12,14 @@ export function TradeOffer({ details, numbers }) {
         <div className="row">
           <p className="col-sm-4 my-auto mb-2 fw-bold">Participant Principal</p>
           <div className="col-sm-8">
-            <Form.Select aria-label="Default select example" className="col">
-              <option>Select Principal</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
+            <Dropdown
+              options={[
+                { value: 1, label: "One" },
+                { value: 2, label: "Two" },
+                { value: 3, label: "Three" },
+              ]}
+              defaultOption={{ value: null, label: "Select Principal" }}
+            />
           </div>
         </div>
       </Card>
@@ -38,8 +44,8 @@ export function TradeOffer({ details, numbers }) {
 
       <Card className="my-2" body>
         <div className="mb-4">
-          {details.map(({ label, value }) => (
-            <div className="row my-2" key={value}>
+          {details.map(({ label, value }, i) => (
+            <div className="row my-2" key={i}>
               <p className="col-sm-4 my-auto fw-semibold">{label}</p>
               <p className="col-sm-8 my-auto">{value}</p>
             </div>
@@ -60,48 +66,42 @@ export function TradeOffer({ details, numbers }) {
         ))}
       </Card>
       <Card className="my-2" body>
-        <div className="row my-2">
-          <p className="col-sm-4 fw-semibold my-auto">Amount to Buy</p>
-          <p className="col-sm-2 my-auto">USD</p>
-          <div className="col-sm-6">
-            <input
-              type="number"
-              className="form-control col-sm-8"
-              placeholder=""
-            />
-          </div>
-        </div>
-        <div className="row my-2">
-          <p className="col-sm-4 fw-semibold my-auto">Bid Price</p>
-          <div className="d-flex col-sm-6 align-items-baseline">
-            <div className="">
-              <input
-                type="number"
-                className="form-control col-sm-8"
-                placeholder=""
-              />
+        <Formik>
+          <>
+            <div className="row my-2">
+              <p className="col-sm-4 fw-semibold my-auto">Amount to Buy</p>
+              <div className="col-sm-8">
+                <Currency unit="USD" className="form-control" />
+              </div>
             </div>
-            <p className="fw-bolder">.</p>
-            <div className="">
-              <input
-                type="number"
-                className="form-control col-sm-8"
-                placeholder=""
-              />
+            <div className="row my-2">
+              <p className="col-sm-4 fw-semibold my-auto">Bid Price</p>
+
+              <div className={"d-flex col-sm-6 align-items-baseline"}>
+                <div className="w-25">
+                  <input type="number" className="form-control col-sm-8" />
+                </div>
+                <p className="fw-bolder">•</p>
+                <div className="w-25">
+                  <input type="number" className="form-control col-sm-8" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="row my-2">
-          <p className="col-sm-4 fw-semibold my-auto">Remarks</p>
-          <div className="col-sm-8">
-            <Form.Select aria-label="Default select example" className="col">
-              <option>Response Text</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </Form.Select>
-          </div>
-        </div>
+            <div className="row my-2">
+              <p className="col-sm-4 fw-semibold my-auto">Remarks</p>
+              <div className="col-sm-8">
+                <Dropdown
+                  options={[
+                    { value: "A", label: "Option A" },
+                    { value: "B", label: "Option B" },
+                    { value: "C", label: "Option C" },
+                  ]}
+                  defaultOption={{ value: null, label: "" }}
+                />
+              </div>
+            </div>
+          </>
+        </Formik>
 
         <Button variant="secondary" className="w-100 mt-3 fw-bold">
           Place Order
