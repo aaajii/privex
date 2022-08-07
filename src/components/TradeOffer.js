@@ -39,7 +39,7 @@ export function TradeOffer({ details, numbers }) {
       <Card className="my-2" body>
         <div className="mb-4">
           {details.map(({ label, value }) => (
-            <div className="row my-2">
+            <div className="row my-2" key={value}>
               <p className="col-sm-4 my-auto fw-semibold">{label}</p>
               <p className="col-sm-8 my-auto">{value}</p>
             </div>
@@ -47,7 +47,7 @@ export function TradeOffer({ details, numbers }) {
         </div>
 
         {numbers.map(({ label, value }, i) => (
-          <div className="row my-2">
+          <div className="row my-2" key={i}>
             <p
               className={`col-sm-4 my-auto fw-semibold ${
                 i === 1 || i === 2 ? "ps-sm-4" : null

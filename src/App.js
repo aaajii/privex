@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Nav, Button } from "react-bootstrap";
 import axios from "axios";
 
@@ -8,29 +8,31 @@ import Content from "./components/Content";
 import "./App.css";
 import TrancheInfo from "./components/TrancheInfo";
 
-const SAMPLE_DATA = [
-  {
-    id: "253",
-    title: "A3 Creating for T1 (cloned from 192)",
-    facilityAmount: 930000000,
-    facilityType: "TLF",
-    maturityDate: new Date(Date.now()).toLocaleDateString(),
-    margin: "LIBOR 0.0% p.a.",
-  },
-  {
-    id: "354",
-    title: "ST - Syndication something here",
-    facilityAmount: 930000000,
-    facilityType: "TLF",
-    maturityDate: new Date(Date.now()).toLocaleDateString(),
-    margin: "LIBOR 0.0% p.a.",
-  },
-];
+// const SAMPLE_DATA = [
+//   {
+//     id: "253",
+//     title: "A3 Creating for T1 (cloned from 192)",
+//     facilityAmount: 930000000,
+//     facilityType: "TLF",
+//     maturityDate: new Date(Date.now()).toLocaleDateString(),
+//     margin: "LIBOR 0.0% p.a.",
+//   },
+//   {
+//     id: "354",
+//     title: "ST - Syndication something here",
+//     facilityAmount: 930000000,
+//     facilityType: "TLF",
+//     maturityDate: new Date(Date.now()).toLocaleDateString(),
+//     margin: "LIBOR 0.0% p.a.",
+//   },
+// ];
 
 const fetchData = () => {
-  const { data } = axios
-    .get("url")
-    .then((response) => console.log(response))
+  const { result: data } = axios
+    .get("https://randomuser.me/api/")
+    .then((response) => {
+      return response;
+    })
     .catch((err) => {
       console.error(err);
     });
@@ -42,6 +44,12 @@ function App() {
   const [showTabbedModal, setShowModal] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [sampleData, setSampleData] = useState([]);
+
+  useEffect(() => {
+    setSampleData(fetchData());
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -66,20 +74,21 @@ function App() {
             defaultActiveKey="0"
             onSelect={(selectedKey) => setSelectedIndex(selectedKey)}
           >
-            {SAMPLE_DATA.map((data, i) => {
-              const { id, title } = data;
-              return (
-                <Nav.Item>
-                  <Nav.Link eventKey={i}>
-                    <h6 className="text-truncate fw-semibold">
-                      {id} - {title}
-                    </h6>
-                  </Nav.Link>
-                </Nav.Item>
-              );
-            })}
+            {sampleData &&
+              sampleData.map((data, i) => {
+                const { id, title } = data;
+                return (
+                  <Nav.Item>
+                    <Nav.Link eventKey={i}>
+                      <h6 className="text-truncate fw-semibold">
+                        {id} - {title}
+                      </h6>
+                    </Nav.Link>
+                  </Nav.Item>
+                );
+              })}
           </Nav>
-          <Content data={SAMPLE_DATA[selectedIndex]} />
+          <Content data={sampleData ? sampleData[selectedIndex] : {}} />
         </div>
       </CustomModal>
 
