@@ -95,6 +95,7 @@ function App() {
       <CustomModal
         showModal={showFormModal}
         onHide={() => setShowFormModal(false)}
+        className="bg-secondary"
       >
         <TrancheInfo />
       </CustomModal>
