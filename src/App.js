@@ -7,6 +7,7 @@ import Content from "./components/Content";
 
 import "./App.css";
 import TrancheInfo from "./components/TrancheInfo";
+import { fetchData } from "./axios/queries";
 
 // const SAMPLE_DATA = [
 //   {
@@ -27,19 +28,6 @@ import TrancheInfo from "./components/TrancheInfo";
 //   },
 // ];
 
-const fetchData = () => {
-  const { result: data } = axios
-    .get("https://randomuser.me/api/")
-    .then((response) => {
-      return response;
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-
-  return data;
-};
-
 function App() {
   const [showTabbedModal, setShowModal] = useState(false);
   const [showFormModal, setShowFormModal] = useState(false);
@@ -47,7 +35,11 @@ function App() {
   const [sampleData, setSampleData] = useState([]);
 
   useEffect(() => {
-    setSampleData(fetchData());
+    async function getData() {
+      setSampleData(await fetchData());
+    }
+
+    getData();
   }, []);
 
   return (
@@ -74,7 +66,7 @@ function App() {
             defaultActiveKey="0"
             onSelect={(selectedKey) => setSelectedIndex(selectedKey)}
           >
-            {sampleData &&
+            {sampleData.length &&
               sampleData.map((data, i) => {
                 const { id, title } = data;
                 return (
