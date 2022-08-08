@@ -70,7 +70,7 @@ function App() {
               sampleData.map((data, i) => {
                 const { id, title } = data;
                 return (
-                  <Nav.Item>
+                  <Nav.Item key={i}>
                     <Nav.Link eventKey={i}>
                       <h6 className="text-truncate fw-semibold">
                         {id} - {title}
