@@ -271,7 +271,7 @@ function TrancheInfo() {
                   e.preventDefault();
                   setFormNumber(formNumber + 1);
                 }}
-                className="btn btn-primary me-3"
+                className="btn btn-secondary me-3"
               >
                 + Tranche
               </button>

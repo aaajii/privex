@@ -1,7 +1,7 @@
 import { Modal } from "react-bootstrap";
 import "./index.css";
 
-function CustomModal({ showModal, onHide, children }) {
+function CustomModal({ showModal, onHide, children, className }) {
   return (
     <Modal
       show={showModal}

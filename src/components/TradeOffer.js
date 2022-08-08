@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { Button, Card } from "react-bootstrap";
 import Currency from "./Forms/Currency";
 import Dropdown from "./Forms/Dropdown";
+import { BsCheckCircleFill } from "react-icons/bs";
 
 export function TradeOffer({ details, numbers }) {
   return (
@@ -28,7 +29,10 @@ export function TradeOffer({ details, numbers }) {
         <Card.Header>
           <h6 className="fw-bolder text-center mb-0">DIRECT SETTLEMENT</h6>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="bg-secondary">
+          <div className="w-100 text-center my-3">
+            <BsCheckCircleFill className="fw-bolder fs-1" />
+          </div>
           <ul>
             <li>
               Identities of the seller and buyer will be revealed AFTER a Price
